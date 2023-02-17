@@ -8,6 +8,7 @@ import config from "./config/configSetup";
 import User from "./models/Users";
 import Otp from "./models/Otp";
 import Twit from "./models/Twit";
+import Comment from "./models/Comment";
 
 const sequelize = new Sequelize(config.DB_NAME, config.DB_USERNAME, config.DB_PASSWORD, {
   host: config.DB_HOST,
@@ -17,7 +18,7 @@ const sequelize = new Sequelize(config.DB_NAME, config.DB_USERNAME, config.DB_PA
   dialectOptions: {
     ssl: { require: true, rejectUnauthorized: false },
   },
-  models: [User, Otp, Twit],
+  models: [User, Otp, Twit, Comment],
 });
 
 const initDB = async () => {

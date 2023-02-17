@@ -23,7 +23,7 @@ api.post("/forgot-password", userRouteValidation("/forgot-password"), resetPassw
 api.post("/update-password", userRouteValidation("/update-password"), updatePassword);
 api.post("/change-password", userRouteValidation("/change-password"), changePassword);
 api.post("/twit", userRouteValidation("/twit"), createTweet);
-api.get("/twit", userRouteValidation("/twit"), allTweet);
+api.get("/twit", userRouteValidation("/twit/all"), allTweet);
 api.delete("/twit", userRouteValidation("/twit/delete"), deleteTweet);
 api.post("/twit/comment", userRouteValidation("/twit/comment"), commentTweet);
 api.post("/twit/like", userRouteValidation("/twit/like"), likeTweet);

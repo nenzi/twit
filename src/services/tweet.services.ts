@@ -1,12 +1,12 @@
 import { CreateTweet } from "../interface";
-import Tweet from "../models/Twit";
+import Twit from "../models/Twit";
 import Comment from "../models/Comment";
 import { fnResponse } from "../helpers/utility";
 
 export class TweetServices {
   public async create({ text, userId }: CreateTweet) {
     try {
-      const user = await Tweet.create({ text, userId });
+      const user = await Twit.create({ text, userId });
       return fnResponse({ status: true, message: `Tweet Posted successfully!`, data: user });
     } catch (error) {
       // console.log(error);
@@ -16,7 +16,7 @@ export class TweetServices {
 
   public async delete({ id }) {
     try {
-      const tweet = await Tweet.destroy({ where: { id: id } });
+      const tweet = await Twit.destroy({ where: { id: id } });
       return fnResponse({ status: true, message: `Tweet Deleted successfully!`, data: tweet });
     } catch (error) {
       // console.log(error);
@@ -25,8 +25,10 @@ export class TweetServices {
   }
 
   public async all({ userId }) {
+    console.log(userId);
     try {
-      const tweets = await Tweet.findAll({ where: { userId: userId } });
+      const tweets = await Twit.findAll({ where: { userId: userId } });
+
       return fnResponse({ status: true, message: `All Tweets!`, data: tweets });
     } catch (error) {
       // console.log(error);
@@ -34,9 +36,10 @@ export class TweetServices {
     }
   }
 
-  public async comment({ text, tweetId }) {
+  public async comment({ text, twitId }) {
     try {
-      const user = await Comment.create({ text, tweetId });
+      const twit = await Twit.findOne({ where: { id: twitId } });
+      const user = await Comment.create({ text, twitId });
       return fnResponse({ status: true, message: `Comment Posted successfully!`, data: user });
     } catch (error) {
       // console.log(error);
@@ -44,14 +47,14 @@ export class TweetServices {
     }
   }
 
-  public async liketweet({ tweetId }) {
+  public async liketweet({ twitId }) {
     try {
-      const like = await Tweet.findOne({ where: { id: tweetId } });
+      const like = await Twit.findOne({ where: { id: twitId } });
 
       const data = {
-        like: like!.likes + 1,
+        likes: like!.likes + 1,
       };
-      const updateTweet = await Tweet.update(data, { where: { id: tweetId } });
+      const updateTweet = await Twit.update(data, { where: { id: twitId } });
       return fnResponse({ status: true, message: `Liked Twit successfully!`, data: updateTweet });
     } catch (error) {
       // console.log(error);

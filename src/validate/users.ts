@@ -101,25 +101,26 @@ const users = (method: string): any => {
       return [body("email").not().isEmpty().isEmail().isString().withMessage("email required")];
     }
 
-    case "/tweet": {
+    case "/twit": {
+      return [body("text").not().isEmpty().isString().withMessage("text required")];
+    }
+
+    case "/twit/all": {
+      return [];
+    }
+
+    case "/twit/delete": {
+      return [body("twitId").not().isEmpty().isInt().withMessage("twitId required")];
+    }
+    case "/twit/comment": {
       return [
+        body("twitId").not().isEmpty().isInt().withMessage("twitId required"),
         body("text").not().isEmpty().isString().withMessage("text required"),
-        body("userId").not().isEmpty().isString().withMessage("userId required"),
       ];
     }
 
-    case "/tweet/delete": {
-      return [body("tweetId").not().isEmpty().isInt().withMessage("tweetId required")];
-    }
-    case "/tweet/comment": {
-      return [
-        body("tweetId").not().isEmpty().isInt().withMessage("tweetId required"),
-        body("text").not().isEmpty().isString().withMessage("text required"),
-      ];
-    }
-
-    case "/tweet/like": {
-      return [body("tweetId").not().isEmpty().isInt().withMessage("tweetId required")];
+    case "/twit/like": {
+      return [body("twitId").not().isEmpty().isInt().withMessage("twitId required")];
     }
   }
 };

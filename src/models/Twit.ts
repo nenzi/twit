@@ -1,12 +1,13 @@
-import { Table, Column, Model, BelongsTo, DataType, AllowNull, ForeignKey } from "sequelize-typescript";
+import { Table, Column, Model, BelongsTo, DataType, AllowNull, ForeignKey, HasMany } from "sequelize-typescript";
 import User from "./Users";
+import Comment from "./Comment";
 
 @Table({ timestamps: true, tableName: "twits" })
 export class Twit extends Model {
   @Column(DataType.STRING)
   text: string;
 
-  @Column(DataType.NUMBER)
+  @Column(DataType.INTEGER)
   likes: number;
 
   @ForeignKey(() => User)
@@ -18,6 +19,9 @@ export class Twit extends Model {
 
   @BelongsTo(() => User, { onDelete: "CASCADE" })
   user!: User;
+
+  @HasMany(() => Comment)
+  comments: Comment[];
 }
 
 export default Twit;
