@@ -14,8 +14,11 @@ export class TweetServices {
     }
   }
 
-  public async delete({ id }) {
+  public async delete({ id, userId }) {
     try {
+      const checkTweet = await Twit.findOne({ where: { id: id } });
+
+      if (checkTweet!.userId != userId) return fnResponse({ status: false, message: `Cannot delete another twit` });
       const tweet = await Twit.destroy({ where: { id: id } });
       return fnResponse({ status: true, message: `Tweet Deleted successfully!`, data: tweet });
     } catch (error) {

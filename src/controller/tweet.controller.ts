@@ -27,10 +27,11 @@ export const deleteTweet = async (req: Request, res: Response) => {
   if (!errors.isEmpty()) return errorResponse(res, "Validation Error", errors.array());
 
   let { twitId } = req.body;
+  let userId = req.user.id;
 
   try {
     const tweetService = new TweetServices();
-    const tweet = await tweetService.delete({ id: twitId });
+    const tweet = await tweetService.delete({ id: twitId, userId: userId });
 
     return successResponse(res, "Deleted successfull", null);
   } catch (err) {
