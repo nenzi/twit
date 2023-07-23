@@ -10,14 +10,12 @@ import Otp from "./models/Otp";
 import Twit from "./models/Twit";
 import Comment from "./models/Comment";
 
-const sequelize = new Sequelize(config.DB_NAME, config.DB_USERNAME, config.DB_PASSWORD, {
+const sequelize = new Sequelize(config.DB_LINK, {
   host: config.DB_HOST,
   port: config.DB_PORT,
-  dialect: "mysql",
+  dialect: "postgres",
   logging: false,
-  dialectOptions: {
-    ssl: { require: true, rejectUnauthorized: false },
-  },
+  dialectOptions: {},
   models: [User, Otp, Twit, Comment],
 });
 

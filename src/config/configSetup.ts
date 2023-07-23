@@ -19,6 +19,7 @@ type Config = {
   DB_PASSWORD: string;
   DB_HOST: string;
   DB_PORT: number;
+  DB_LINK: string;
   DB_DIALECT: string;
   PUBLIC_ROUTES: string[] | [];
   BUSINESS_PUBLIC_ROUTES: string[] | [];
@@ -31,6 +32,7 @@ const getConfig = (): Config => {
     PORT: Number(process.env.PORT)!,
     REDIS_INSTANCE_URL: process.env.REDIS_INSTANCE_URL!,
     SENDGRID_API_KEY: process.env.SENDGRID_API_KEY!,
+    DB_LINK: process.env.DB_LINK!,
     WEBSITE: process.env.WEBSITE!,
     LOGO: process.env.LOGO!,
     MAIL_FROM_NAME: process.env.MAIL_FROM_NAME!,
