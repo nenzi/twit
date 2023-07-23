@@ -14,9 +14,6 @@ type Config = {
   LOGO: string;
   MAIL_FROM_NAME: string;
   MAIL_FROM: string;
-  DB_NAME: string;
-  DB_USERNAME: string;
-  DB_PASSWORD: string;
   DB_HOST: string;
   DB_PORT: number;
   DB_LINK: string;
@@ -40,9 +37,6 @@ const getConfig = (): Config => {
     SSL: true,
     SECRET_KEY: process.env.SECRET_KEY!,
     JWT_EXPIRY_TIME: process.env.JWT_EXPIRY_TIME!,
-    DB_NAME: process.env.DB_NAME!,
-    DB_USERNAME: process.env.DB_USERNAME!,
-    DB_PASSWORD: process.env.DB_PASSWORD!,
     DB_HOST: process.env.DB_HOST!,
     DB_PORT: Number(process.env.DB_PORT),
     DB_DIALECT: process.env.DB_DIALECT!,
